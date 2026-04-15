@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVHQ & Van Land Retail Support Metrics — Q1 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root { --primary: #2563eb; --accent: #f59e0b; --danger: #ef4444; --success: #10b981; --bg: #f8fafc; --card: #ffffff; --text: #1e293b; --muted: #64748b; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+header { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; padding: 40px; border-radius: 16px; margin-bottom: 30px; }
+header h1 { font-size: 2em; margin-bottom: 4px; }
+header h2 { font-size: 1.4em; font-weight: 400; opacity: 0.9; margin-bottom: 4px; }
+header h3 { font-size: 1.1em; font-weight: 400; opacity: 0.8; }
+.kpi-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
+.kpi-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+.kpi { background: var(--card); border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); text-align: center; }
+.kpi .number { font-size: 1.9em; font-weight: 700; }
+.kpi .label { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
+.kpi.alert .number { color: var(--danger); }
+.kpi.success .number { color: var(--success); }
+.kpi.warn .number { color: var(--accent); }
+.kpi.primary .number { color: var(--primary); }
+@media (max-width: 768px) { .kpi-grid-4, .kpi-grid-3 { grid-template-columns: repeat(2, 1fr); } .chart-row { grid-template-columns: 1fr !important; } }
+.card { background: var(--card); border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 24px; }
+.card h2 { font-size: 1.3em; margin-bottom: 16px; color: var(--primary); }
+.card h3 { font-size: 1.1em; margin: 16px 0 8px; color: var(--text); }
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+.chart-container { position: relative; height: 350px; }
+.chart-container.tall { height: 450px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #f1f5f9; font-weight: 600; color: var(--muted); text-transform: uppercase; font-size: 0.8em; }
+tr:hover { background: #f8fafc; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600; }
+.badge-t2 { background: #dbeafe; color: #1e40af; }
+.badge-t3 { background: #fef3c7; color: #92400e; }
+.badge-ai { background: #ede9fe; color: #5b21b6; }
+.insight { background: #fffbeb; border-left: 4px solid var(--accent); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+.insight.critical { background: #fef2f2; border-left-color: var(--danger); }
+.insight.good { background: #f0fdf4; border-left-color: var(--success); }
+.compare-good { color: var(--success); font-weight: 600; }
+.compare-warn { color: var(--accent); font-weight: 600; }
+.compare-great { color: var(--primary); font-weight: 700; }
+.rec-list { list-style: none; counter-reset: rec; }
+.rec-list li { counter-increment: rec; padding: 16px; margin-bottom: 12px; background: #f8fafc; border-radius: 8px; position: relative; padding-left: 60px; }
+.rec-list li::before { content: counter(rec); position: absolute; left: 16px; top: 16px; width: 32px; height: 32px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.heatmap { width: 100%; border-collapse: collapse; }
+.heatmap td { text-align: center; padding: 6px 8px; font-size: 0.8em; border: 1px solid #e2e8f0; min-width: 50px; }
+.heatmap th { padding: 8px; font-size: 0.75em; }
+.tier-high { background: #fef2f2; }
+.tier-med { background: #fffbeb; }
+footer { text-align: center; padding: 30px; color: var(--muted); font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Campervan HQ & Van Land</h1>
+  <h2>Retail Support Metrics</h2>
+  <h3>Q1 2026</h3>
+</header>
+
+<!-- KPI ROW 1 (4): Volume -->
+<div class="kpi-grid-4">
+  <div class="kpi primary"><div class="number">3,023</div><div class="label">Real Tickets (excl. spam & dropped)</div></div>
+  <div class="kpi success"><div class="number">88%</div><div class="label">Human Closed</div></div>
+  <div class="kpi" style="background:linear-gradient(135deg,#ede9fe,#f5f3ff)"><div class="number" style="color:#7c3aed">12%</div><div class="label">AI Bot Closed</div></div>
+  <div class="kpi"><div class="number" style="color:#94a3b8">2,896</div><div class="label">Auto Filtered (spam)</div></div>
+</div>
+<!-- KPI ROW 2 (3): Quality & Response -->
+<div class="kpi-grid-3">
+  <div class="kpi success"><div class="number">4.87</div><div class="label">Avg Human CSAT</div></div>
+  <div class="kpi alert"><div class="number">3.67</div><div class="label">AI Bot CSAT</div></div>
+  <div class="kpi success"><div class="number">14m 27s</div><div class="label">Avg First Response (Q1)</div></div>
+</div>
+<!-- KPI ROW 3 (4): #1's -->
+<div class="kpi-grid-4">
+  <div class="kpi warn"><div class="number">~40%</div><div class="label">WISMO (of real volume)</div></div>
+  <div class="kpi"><div class="number" style="color:#e11d48">Order ETA</div><div class="label">#1 Reason — 509 tickets</div></div>
+  <div class="kpi"><div class="number" style="color:#7c3aed">Window</div><div class="label">#1 Product — 303 tickets</div></div>
+  <div class="kpi"><div class="number" style="color:#0d9488">Perfect Fit</div><div class="label">#1 Vendor — 265 tickets</div></div>
+</div>
+<!-- KPI ROW 4 (4): Pre-Sale + Channel highlights -->
+<div class="kpi-grid-4" style="margin-bottom:30px">
+  <div class="kpi primary"><div class="number">1,056</div><div class="label">Pre-Sale Tickets</div></div>
+  <div class="kpi"><div class="number" style="color:#6366f1">Email 52%</div><div class="label">Top Channel — 1,664 tickets</div></div>
+  <div class="kpi warn"><div class="number">6.26</div><div class="label">Msgs / Ticket (avg 4.15)</div></div>
+  <div class="kpi success"><div class="number">21m</div><div class="label">Chat Resolution Time</div></div>
+</div>
+
+<!-- HOW WE COMPARE (Lifetime / All Teams) -->
+<div class="card">
+  <h2>How We Compare — Gorgias Benchmarks</h2>
+  <p style="color:var(--muted); margin-bottom:16px;">Lifetime data across all teams/queues vs. other Gorgias merchants</p>
+  <table>
+    <thead><tr><th>Metric</th><th>Us</th><th>Avg Merchant</th><th>Top 5%</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>CSAT</td><td><strong>4.85</strong></td><td>4.56</td><td>4.89</td><td><span class="compare-good">Good — near Top 5%</span></td></tr>
+      <tr><td>First Response Time</td><td><strong>6m 11s</strong></td><td>10h 28m</td><td>46m 06s</td><td><span class="compare-great">Exceptional — 100x faster than avg</span></td></tr>
+      <tr><td>AI Handoff Response</td><td><strong>36m 18s</strong></td><td>10h 28m</td><td>46m 06s</td><td><span class="compare-great">Exceptional</span></td></tr>
+      <tr><td>Resolution Time</td><td><strong>16h 05m</strong></td><td>1d 17h</td><td>2h 11m</td><td><span class="compare-good">Good — room to improve toward Top 5%</span></td></tr>
+      <tr><td>Messages per Ticket</td><td><strong>6.26</strong></td><td>4.15</td><td>3.10</td><td><span class="compare-warn">Needs work — 50% more msgs than avg</span></td></tr>
+    </tbody>
+  </table>
+  <div class="insight good">
+    First response time is a standout strength — <strong>6 minutes vs industry average of 10+ hours</strong>. The opportunity is in messages per ticket: reducing back-and-forth through better templates, macros, or upfront info gathering.
+  </div>
+</div>
+
+<!-- WISMO CALLOUT -->
+<div class="card">
+  <h2>The #1 Finding: WISMO is 40% of Real Support Volume</h2>
+  <div class="insight critical">
+    <strong>~960 tickets per quarter</strong> are customers asking "Where is my order?" — the single biggest drain on CSR time and biggest source of customer frustration.
+  </div>
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px;">
+    <div>
+      <h3>WISMO-Related Reasons</h3>
+      <table>
+        <tr><td>Order ETA / Status</td><td><strong>509</strong></td></tr>
+        <tr><td>Shipping Status (intent)</td><td><strong>229</strong></td></tr>
+        <tr><td>Availability / Lead Time</td><td><strong>200</strong></td></tr>
+        <tr><td>Shipping Speed / Timing</td><td><strong>25</strong></td></tr>
+        <tr><th>Total WISMO-Related</th><th>~963</th></tr>
+      </table>
+    </div>
+    <div>
+      <div class="chart-container"><canvas id="wismoChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- AGENT PERFORMANCE -->
+<div class="card">
+  <h2>Agent Performance — Retail Team</h2>
+  <p style="color:var(--muted); margin-bottom:16px;">Jeremy's primary volume is in Shopify Inbox (not reflected here).</p>
+  <table>
+    <thead>
+      <tr><th>Agent</th><th>Role</th><th>% CSR</th><th>Closed</th><th>Handle Time</th><th>CSAT</th><th>1st Response</th><th>One-Touch %</th><th>Closed/Hr</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Ellie</td><td><span class="badge badge-t2">T2</span></td><td></td><td><strong>903</strong></td><td>9m 17s</td><td>4.88</td><td>1h 16m</td><td>21.9%</td><td>3.94</td></tr>
+      <tr><td>Josie</td><td><span class="badge badge-t2">T2</span></td><td>50%</td><td><strong>614</strong></td><td>6m 48s</td><td>4.85</td><td>44m 01s</td><td>17.3%</td><td>5.97</td></tr>
+      <tr><td>AI Bot</td><td><span class="badge badge-ai">AI</span></td><td></td><td>377</td><td>2m 18s</td><td style="color:var(--danger)"><strong>3.67</strong></td><td>4m 32s</td><td>9.3%</td><td>—</td></tr>
+      <tr><td>Holly</td><td><span class="badge badge-t3">T3 / Mgr</span></td><td></td><td>287</td><td>7m 08s</td><td>4.87</td><td>14m 22s</td><td>28.6%</td><td>3.46</td></tr>
+      <tr><td>Garrett</td><td><span class="badge badge-t3">T3 / PM</span></td><td>10-15%</td><td>178</td><td>6m 08s</td><td style="color:var(--success)"><strong>5.00</strong></td><td>3h 15m</td><td>0.6%</td><td>10.61</td></tr>
+      <tr><td>Kelsey</td><td><span class="badge badge-t3">T3 / Mktg</span></td><td>10%</td><td>109</td><td>30m 53s</td><td style="color:var(--success)"><strong>5.00</strong></td><td>5h 03m</td><td>9.2%</td><td>1.57</td></tr>
+      <tr><td>Jeremy</td><td><span class="badge badge-t3">T3 / E-com Mgr</span></td><td></td><td>44</td><td>8m 17s</td><td>4.60</td><td>9h 35m</td><td>13.6%</td><td>2.50</td></tr>
+    </tbody>
+  </table>
+  <div class="chart-container tall" style="margin-top:20px"><canvas id="agentChart"></canvas></div>
+</div>
+
+<!-- CHANNEL MIX -->
+<div class="card">
+  <h2>Channel Mix</h2>
+  <div class="chart-row">
+    <div>
+      <table>
+        <thead><tr><th>Channel</th><th>Tickets</th><th>% Mix</th><th>Resolution</th><th>1st Response</th><th>CSAT</th></tr></thead>
+        <tbody>
+          <tr><td>Email</td><td><strong>1,664</strong></td><td>52.1%</td><td>3d 14h</td><td>3h 47m</td><td>4.93</td></tr>
+          <tr><td>Chat</td><td><strong>824</strong></td><td>25.8%</td><td>21m</td><td>17s</td><td>4.77</td></tr>
+          <tr><td>Phone</td><td><strong>316</strong></td><td>9.9%</td><td>19h 34m</td><td>2h 50m</td><td>—</td></tr>
+          <tr><td>SMS</td><td><strong>222</strong></td><td>7.0%</td><td>19h 55m</td><td>23m 54s</td><td>—</td></tr>
+          <tr><td>Help Center</td><td>107</td><td>3.4%</td><td>2d 06h</td><td>2h 12m</td><td>4.68</td></tr>
+          <tr><td>Contact Form</td><td>61</td><td>1.9%</td><td>3h 07m</td><td>36m 54s</td><td>4.64</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="chart-container"><canvas id="channelChart"></canvas></div>
+    </div>
+  </div>
+  <div class="insight">
+    <strong>Chat is the speed champion</strong> — 17-second first response, 21-minute resolution. Email has the best CSAT (4.93) but slowest resolution (3.5 days). Shifting volume toward chat could improve both speed and satisfaction.
+  </div>
+</div>
+
+<!-- TICKET VOLUME HEATMAP -->
+<div class="card">
+  <h2>Busiest Times — Ticket Volume Heatmap</h2>
+  <p style="color:var(--muted); margin-bottom:16px;">Darker = more tickets. Peak: Monday 10 AM (195 tickets in Q1).</p>
+  <div style="overflow-x:auto;">
+    <table class="heatmap" id="heatmapTable">
+      <thead><tr><th>Hour</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
+      <tbody id="heatmapBody"></tbody>
+    </table>
+  </div>
+  <div class="insight">
+    <strong>Staffing insight:</strong> 90% of volume is Mon–Fri, with the peak window 8 AM–12 PM. Monday 9–11 AM is the single busiest block. Weekends drop 85–90%.
+  </div>
+</div>
+
+<!-- PRODUCT CATEGORIES & VENDORS -->
+<div class="chart-row">
+  <div class="card">
+    <h2>Top Product Categories</h2>
+    <p style="color:var(--muted); margin-bottom:12px;">By ticket count (excluding spam/untagged/dropped)</p>
+    <div class="chart-container tall"><canvas id="productChart"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Top Vendors</h2>
+    <p style="color:var(--muted); margin-bottom:12px;">By ticket count (excluding untagged)</p>
+    <div class="chart-container tall"><canvas id="vendorChart"></canvas></div>
+  </div>
+</div>
+
+<!-- TICKET REASONS -->
+<div class="card">
+  <h2>Top Ticket Reasons</h2>
+  <p style="color:var(--muted); margin-bottom:12px;">Excluding spam, dropped, and dev/test tickets</p>
+  <div class="chart-container tall"><canvas id="reasonChart"></canvas></div>
+</div>
+
+<!-- VENDOR ACCOUNTABILITY SCORECARD -->
+<div class="card">
+  <h2>Vendor Support Burden — Accountability Scorecard</h2>
+  <p style="color:var(--muted); margin-bottom:16px;">Vendors tiered by support ticket volume. Revenue data (from Shopify) needed to calculate cost-per-dollar ratios.</p>
+  <h3>High Burden (75+ tickets/quarter) — 6 vendors, 874 tickets</h3>
+  <table>
+    <thead><tr><th>Vendor</th><th>Q1 Tickets</th><th>% of Tagged</th><th>Tickets/Week</th></tr></thead>
+    <tbody>
+      <tr class="tier-high"><td>Perfect Fit</td><td><strong>265</strong></td><td>18.3%</td><td>20.4</td></tr>
+      <tr class="tier-high"><td>EcoFlow</td><td><strong>234</strong></td><td>16.1%</td><td>18.0</td></tr>
+      <tr class="tier-high"><td>CR Laurence</td><td><strong>113</strong></td><td>7.8%</td><td>8.7</td></tr>
+      <tr class="tier-high"><td>Van Windows Direct</td><td><strong>106</strong></td><td>7.3%</td><td>8.2</td></tr>
+      <tr class="tier-high"><td>2tec2</td><td><strong>81</strong></td><td>5.6%</td><td>6.2</td></tr>
+      <tr class="tier-high"><td>Fiamma</td><td><strong>75</strong></td><td>5.2%</td><td>5.8</td></tr>
+    </tbody>
+  </table>
+  <h3>Medium Burden (30–74 tickets/quarter) — 7 vendors, 285 tickets</h3>
+  <table>
+    <thead><tr><th>Vendor</th><th>Q1 Tickets</th><th>% of Tagged</th><th>Tickets/Week</th></tr></thead>
+    <tbody>
+      <tr class="tier-med"><td>Marathon</td><td>62</td><td>4.3%</td><td>4.8</td></tr>
+      <tr class="tier-med"><td>Lonseal</td><td>47</td><td>3.2%</td><td>3.6</td></tr>
+      <tr class="tier-med"><td>Aluminess</td><td>40</td><td>2.8%</td><td>3.1</td></tr>
+      <tr class="tier-med"><td>Tec Vanlife</td><td>39</td><td>2.7%</td><td>3.0</td></tr>
+      <tr class="tier-med"><td>Mobiframe</td><td>34</td><td>2.3%</td><td>2.6</td></tr>
+      <tr class="tier-med"><td>AM Auto</td><td>32</td><td>2.2%</td><td>2.5</td></tr>
+      <tr class="tier-med"><td>Incline</td><td>31</td><td>2.1%</td><td>2.4</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--muted); margin-top:12px;"><em>29 additional vendors in Low tier (&lt;30 tickets/quarter) account for 292 tickets combined.</em></p>
+  <div class="insight">
+    <strong>6 vendors generate 60% of all tagged support tickets.</strong> Next step: cross-reference with Shopify revenue per vendor to identify which vendors cost the most support per dollar of revenue — and use that data in vendor negotiations.
+  </div>
+</div>
+
+<!-- PRE-SALE OPPORTUNITY -->
+<div class="card">
+  <h2>Pre-Sale Opportunity</h2>
+  <div class="insight good">
+    <strong>1,056 pre-sale tickets</strong> = customers actively trying to buy. These are the highest-value support interactions.
+  </div>
+  <table>
+    <thead><tr><th>Pre-Sale Reason</th><th>Q1 Tickets</th><th>Opportunity</th></tr></thead>
+    <tbody>
+      <tr><td>Product Questions</td><td><strong>435</strong></td><td>FAQ pages, AI bot, comparison guides</td></tr>
+      <tr><td>Ordering / Website Help</td><td><strong>221</strong></td><td>UX improvements, checkout flow</td></tr>
+      <tr><td>Availability / Lead Time</td><td><strong>200</strong></td><td>Stock status on product pages</td></tr>
+      <tr><td>Wholesale / Upfitter</td><td>64</td><td>Dedicated wholesale portal</td></tr>
+      <tr><td>Shipping Questions</td><td>51</td><td>Shipping calculator, clear policies</td></tr>
+      <tr><td>Coupon / Discount</td><td>46</td><td>Promo visibility, exit-intent</td></tr>
+      <tr><td>Installation Questions</td><td>39</td><td>Install guides, video content</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- DROPPED CALLS ANALYSIS -->
+<div class="card">
+  <h2>Dropped Calls Analysis</h2>
+  <div class="insight critical">
+    <strong>276 dropped calls in Q1</strong> — all from CVHQ (Campervan HQ does not answer calls or allow voicemail). Van Land answers its calls (316 connected). Combined, 592 call attempts — <strong>47% of callers never get through.</strong>
+  </div>
+  <table>
+    <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Van Land — Connected Calls</td><td><strong>316</strong></td></tr>
+      <tr><td>CVHQ — Dropped Calls</td><td><strong>276</strong></td></tr>
+      <tr><td>Total Call Attempts</td><td><strong>592</strong></td></tr>
+      <tr><td>Drop Rate (CVHQ)</td><td><strong>100%</strong></td></tr>
+      <tr><td>Avg Dropped per Week</td><td><strong>~21</strong></td></tr>
+    </tbody>
+  </table>
+  <h3>Estimated Impact</h3>
+  <p style="margin-top:8px;">
+    Applying the same ticket reason distribution (~40% WISMO, ~35% pre-sale, ~25% other):
+  </p>
+  <table style="margin-top:8px;">
+    <thead><tr><th>Estimated Reason</th><th>Dropped Calls</th><th>Implication</th></tr></thead>
+    <tbody>
+      <tr><td>WISMO (~40%)</td><td>~110</td><td>Customers frustrated enough to call about orders — high churn risk</td></tr>
+      <tr><td>Pre-Sale (~35%)</td><td>~97</td><td>Potential buyers who never connected — lost revenue</td></tr>
+      <tr><td>Other (~25%)</td><td>~69</td><td>Returns, post-sale, general inquiries</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:12px;">
+    <strong>CSR time estimate:</strong> At ~9 minutes avg handle time (phone channel data), answering these calls would require approximately <strong>41 hours per quarter</strong> — roughly half a person-week.
+  </p>
+  <p style="margin-top:12px; color: var(--muted); font-size:0.85em;">
+    <em>Phone handle time based on Q1 phone channel data (9m 34s avg).</em>
+  </p>
+</div>
+
+<!-- RECOMMENDATIONS -->
+<div class="card">
+  <h2>Top 6 Recommendations for Q2</h2>
+  <ol class="rec-list">
+    <li>
+      <strong>Improve AI Bot CSAT & Expand Scope</strong><br>
+      Current CSAT 3.67 vs human 4.87 — focus training on product knowledge and common inquiries to both improve satisfaction and increase the share of tickets AI can handle. Target: 4.3+ CSAT, 20%+ of ticket volume. <em>Frees CSR time for pre-sale conversion and phone support evaluation.</em>
+    </li>
+    <li>
+      <strong>Attack WISMO — Streamline Order Tracking</strong><br>
+      ~960 tickets/quarter (40% of real volume). Build order status page, add realistic ETAs by product type, start tracking actual vs promised vendor delivery times. Streamlining the process also enables AI to eventually handle the bulk of WISMO inquiries. <em>Frees CSR time for pre-sale conversion and phone support evaluation.</em>
+    </li>
+    <li>
+      <strong>Convert Pre-Sale Tickets into Revenue</strong><br>
+      1,056 pre-sale tickets = people trying to buy. Track conversion rate separately. Route to trained agents. Better product pages (FAQs, install guides, stock status) reduce questions AND increase sales.
+    </li>
+    <li>
+      <strong>Phone Channel Decision</strong><br>
+      Van Land answers calls; CVHQ drops 100% (276/quarter). An estimated ~97 of those are pre-sale inquiries — potential buyers who never connect. Evaluate whether adding phone/callback support for CVHQ would pay for itself in captured sales.
+    </li>
+    <li>
+      <strong>Vendor Accountability Scorecard</strong><br>
+      6 vendors generate 60% of tagged support tickets. Cross-reference with Shopify revenue to calculate support cost per revenue dollar. Use in vendor negotiations and stocking decisions — hold vendors accountable for the support burden their products create.
+    </li>
+    <li>
+      <strong>Close the Tagging Gap</strong><br>
+      "Other" appears across reason, product, and vendor fields — these are tickets where more granular tags are needed. Better tagging = better data = smarter decisions. Review and expand tag taxonomy to reduce "Other" classification.
+    </li>
+  </ol>
+</div>
+
+<footer>
+  Campervan HQ & Van Land · Q1 2026 Retail Support Analysis · Data source: Gorgias
+</footer>
+
+</div>
+
+<script>
+const colors = {
+  blue: '#3b82f6', amber: '#f59e0b', red: '#ef4444',
+  green: '#10b981', purple: '#8b5cf6', pink: '#ec4899', indigo: '#6366f1',
+  teal: '#14b8a6', orange: '#f97316', slate: '#64748b', lime: '#84cc16'
+};
+
+// WISMO Pie
+new Chart(document.getElementById('wismoChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['WISMO (~960)', 'Pre-Sale (1,056)', 'Order Mgmt (370)', 'Post-Sale (230)', 'Other (200)'],
+    datasets: [{ data: [960, 1056, 370, 230, 200], backgroundColor: [colors.red, colors.green, colors.blue, colors.purple, colors.slate] }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+});
+
+// Agent Chart
+const agentNames = ['Ellie', 'Josie (50%)', 'AI Bot', 'Holly', 'Garrett', 'Kelsey', 'Jeremy'];
+const agentClosed = [903, 614, 377, 287, 178, 109, 44];
+const agentCSAT = [4.88, 4.85, 3.67, 4.87, 5.0, 5.0, 4.6];
+new Chart(document.getElementById('agentChart'), {
+  type: 'bar',
+  data: {
+    labels: agentNames,
+    datasets: [
+      { label: 'Tickets Closed', data: agentClosed, backgroundColor: agentNames.map(n => n.includes('AI') ? colors.purple : n.includes('Jeremy') ? colors.teal : colors.blue), yAxisID: 'y', borderRadius: 4 },
+      { label: 'CSAT', data: agentCSAT, type: 'line', borderColor: colors.amber, backgroundColor: colors.amber, yAxisID: 'y1', pointRadius: 6, pointBackgroundColor: agentCSAT.map(v => v < 4 ? colors.red : colors.amber), tension: 0.1 }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: 'Tickets Closed' } }, y1: { position: 'right', min: 3, max: 5.2, title: { display: true, text: 'CSAT Score' }, grid: { drawOnChartArea: false } } } }
+});
+
+// Channel Chart
+new Chart(document.getElementById('channelChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Email (52%)', 'Chat (26%)', 'Phone (10%)', 'SMS (7%)', 'Help Center (3%)', 'Contact Form (2%)'],
+    datasets: [{ data: [1664, 824, 316, 222, 107, 61], backgroundColor: [colors.blue, colors.green, colors.orange, colors.teal, colors.purple, colors.slate] }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+});
+
+// Product Chart
+const prodLabels = ['Window','Power','Plumbing','Flooring','Fabric','Insulation','Product Misc','Hardware Misc','Awning','Heaters','Seating','Fan / Skylight','Window Misc','Roof Rack','Storage'];
+const prodValues = [303,215,167,159,144,134,127,115,80,79,67,64,61,57,47];
+const prodPalette = prodValues.map((v,i) => { const h=220+i*8, s=70-i*2, l=50+i*2; return `hsl(${h},${s}%,${l}%)`; });
+new Chart(document.getElementById('productChart'), {
+  type: 'bar',
+  data: { labels: prodLabels, datasets: [{ data: prodValues, backgroundColor: prodPalette, borderRadius: 4 }] },
+  options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Tickets' } } } }
+});
+
+// Vendor Chart
+const vendorLabels = ['Perfect Fit','EcoFlow','CR Laurence','Van Windows Direct','2tec2','Fiamma','Marathon','Lonseal','Aluminess','Tec Vanlife','Mobiframe','AM Auto','Incline','Arctic Tern','VanEssential'];
+const vendorValues = [265,234,113,106,81,75,62,47,40,39,34,32,31,28,27];
+const vendorPalette = vendorValues.map((v,i) => { const h=170+i*6, s=65-i*2, l=40+i*2; return `hsl(${h},${s}%,${l}%)`; });
+new Chart(document.getElementById('vendorChart'), {
+  type: 'bar',
+  data: { labels: vendorLabels, datasets: [{ data: vendorValues, backgroundColor: vendorPalette, borderRadius: 4 }] },
+  options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Tickets' } } } }
+});
+
+// Reason Chart
+const reasonLabels = ['Order ETA / Status','Product Question','Ordering Help','Availability / Lead Time','Other','Change / Cancel Order','Return / Exchange','Technical Issues','Other Help','Change Address','Order Pickup','Services N/A','Wholesale / Upfitter','Shipping Question','Coupon / Discount'];
+const reasonValues = [509,435,221,200,179,173,89,84,82,71,71,66,64,51,46];
+const reasonPalette = reasonValues.map((v,i) => { const h=220, s=70, l=45+i*2.5; return `hsl(${h},${s}%,${l}%)`; });
+new Chart(document.getElementById('reasonChart'), {
+  type: 'bar',
+  data: { labels: reasonLabels, datasets: [{ data: reasonValues, backgroundColor: reasonPalette, borderRadius: 4 }] },
+  options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { title: { display: true, text: 'Tickets' } } } }
+});
+
+// Heatmap
+const heatmapData = [
+  ['12 AM',10,7,8,5,7,0,4],['1 AM',5,8,1,2,4,1,4],['2 AM',18,4,3,23,3,1,3],['3 AM',12,1,3,8,0,3,1],
+  ['4 AM',8,7,2,4,8,2,3],['5 AM',11,13,6,3,3,1,6],['6 AM',19,29,17,18,22,5,8],['7 AM',61,49,35,32,34,12,13],
+  ['8 AM',134,109,92,93,89,19,23],['9 AM',181,160,118,117,131,31,41],['10 AM',195,170,126,136,140,37,38],
+  ['11 AM',173,148,126,113,112,37,38],['12 PM',136,139,109,98,96,34,31],['1 PM',114,107,96,96,89,32,33],
+  ['2 PM',98,109,72,81,71,26,28],['3 PM',79,75,63,65,55,23,23],['4 PM',62,53,48,59,49,21,20],
+  ['5 PM',47,47,35,38,33,14,14],['6 PM',31,25,23,33,19,11,14],['7 PM',20,19,13,18,10,10,8],
+  ['8 PM',13,12,18,13,8,8,9],['9 PM',10,13,12,5,8,6,3],['10 PM',6,4,5,6,4,3,4],['11 PM',3,5,5,4,3,7,2]
+];
+const maxVal = Math.max(...heatmapData.flatMap(r => r.slice(1)));
+const tbody = document.getElementById('heatmapBody');
+heatmapData.forEach(row => {
+  const tr = document.createElement('tr');
+  row.forEach((val, i) => {
+    const td = document.createElement(i === 0 ? 'th' : 'td');
+    td.textContent = i === 0 ? val : val;
+    if (i > 0) {
+      const intensity = val / maxVal;
+      const r = Math.round(255 - intensity * 218);
+      const g = Math.round(255 - intensity * 127);
+      const b = Math.round(255 - intensity * 9);
+      td.style.backgroundColor = `rgb(${r},${g},${b})`;
+      if (intensity > 0.65) td.style.color = 'white';
+      td.style.fontWeight = intensity > 0.5 ? '700' : '400';
+    }
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+});
+</script>
+</body>
+</html>
