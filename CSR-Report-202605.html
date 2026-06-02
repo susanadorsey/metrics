@@ -1,258 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CVHQ & Van Land Retail Support Metrics — May 2026</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <style>
-    :root{--bg:#f8fafc;--card:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--blue:#2563eb;--pink:#fdf2f8;--yellow:#fffbeb}
-    *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.55;margin:0}.container{max-width:1220px;margin:0 auto;padding:20px}header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:38px;border-radius:16px;margin-bottom:24px}header h1{margin:0 0 4px;font-size:2em}header h2{margin:0 0 4px;font-size:1.35em;font-weight:400;opacity:.95}header h3{margin:0;font-size:1.05em;font-weight:400;opacity:.85}.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}.tile{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.tile .eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#111}.tile .value{font-size:1.8em;font-weight:700;color:#111;margin-top:8px;line-height:1.2}.tile .sub{font-size:.9em;color:#444;margin-top:6px}.card{background:var(--card);border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin-bottom:24px}.card h2{font-size:1.28em;margin:0 0 12px;color:#2563eb}.card h3{margin:18px 0 10px;font-size:1.02em}.chart-container{position:relative;height:340px}.chart-container.tall{height:440px}.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}.insight{background:#fffbeb;border-left:4px solid #f59e0b;padding:14px 16px;border-radius:0 8px 8px 0;margin:16px 0}.insight.good{background:#f0fdf4;border-left-color:#10b981}.insight.critical{background:#fef2f2;border-left-color:#ef4444}table{width:100%;border-collapse:collapse;font-size:.92em}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #e5e7eb;vertical-align:top}th{background:#f3f4f6;color:#6b7280;text-transform:uppercase;font-size:.78em;letter-spacing:.04em}.heatmap td{text-align:center;padding:3px 5px;font-size:.72em;line-height:1.1;border:1px solid #e5e7eb;min-width:40px}.heatmap th{text-align:center;padding:4px 5px;font-size:.7em;line-height:1.1;border:1px solid #e5e7eb}.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:.8em;font-weight:600}.badge-t2{background:#dbeafe;color:#1e40af}.badge-t3{background:#fef3c7;color:#92400e}.badge-ai{background:#ede9fe;color:#5b21b6}.tier-high td{background:#fdf2f8}.tier-med td{background:#fffbeb}.rec-list{list-style:none;counter-reset:rec;padding:0}.rec-list li{counter-increment:rec;padding:16px 16px 16px 60px;margin-bottom:12px;background:#f8fafc;border-radius:8px;position:relative}.rec-list li::before{content:counter(rec);position:absolute;left:16px;top:16px;width:32px;height:32px;background:#2563eb;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}footer{text-align:center;padding:26px;color:#6b7280;font-size:.85em}@media (max-width:900px){.kpi-grid,.chart-row{grid-template-columns:1fr 1fr}}@media (max-width:640px){.kpi-grid,.chart-row{grid-template-columns:1fr}}    
-  </style>
-</head>
-<body>
-<div class="container">
-  <header>
-    <h1>Campervan HQ &amp; Van Land</h1>
-    <h2>Retail Support Metrics</h2>
-    <h3>May 2026</h3>
-  </header>
-
-  <div class="kpi-grid">
-    <div class="tile"><div class="eyebrow">Real Tickets</div><div class="value">625</div><div class="sub">Excludes spam, dropped, and dev/test</div></div>
-    <div class="tile"><div class="eyebrow">Human vs AI Closed</div><div class="value">74% / 26%</div><div class="sub">Tracked agents only</div></div>
-    <div class="tile"><div class="eyebrow">Auto Filtered</div><div class="value">451</div><div class="sub">Spam / junk tickets</div></div>
-    <div class="tile"><div class="eyebrow">Avg Human CSAT</div><div class="value">4.8</div><div class="sub">AI Bot CSAT: 2.7</div></div>
-  </div>
-  <div class="kpi-grid">
-    <div class="tile"><div class="eyebrow">Avg First Response</div><div class="value">9m 26s</div><div class="sub">Latest Gorgias overview benchmark</div></div>
-    <div class="tile"><div class="eyebrow">WISMO Share</div><div class="value">28.5%</div><div class="sub">178 tickets</div></div>
-    <div class="tile"><div class="eyebrow">Top Channel</div><div class="value">Email</div><div class="sub">866 tickets (55.6%)</div></div>
-    <div class="tile"><div class="eyebrow">Msgs / Ticket</div><div class="value">6.65</div><div class="sub">Average ticket resolution time: 17h 32m</div></div>
-  </div>
-  <div class="kpi-grid" style="margin-bottom:30px">
-    <div class="tile"><div class="eyebrow">Top Ticket Reason</div><div class="value">ETA / Status</div><div class="sub">125 tickets</div></div>
-    <div class="tile"><div class="eyebrow">Top Product Type</div><div class="value">Window</div><div class="sub">140 tickets</div></div>
-    <div class="tile"><div class="eyebrow">Top Vendor</div><div class="value">EcoFlow</div><div class="sub">58 tickets</div></div>
-    <div class="tile"><div class="eyebrow">Pre-Sale Tickets</div><div class="value">273</div><div class="sub">Customers actively trying to buy</div></div>
-  </div>
-
-  <div class="card">
-    <h2>How We Compare — Gorgias Benchmarks</h2>
-    <table>
-      <thead><tr><th>Metric</th><th>Us</th><th>Avg Merchant</th><th>Top 5%</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td>CSAT</td><td>4.61</td><td>4.56</td><td>4.89</td><td>Good — near Top 5%</td></tr>
-        <tr><td>Resolution Time</td><td>17h 32m</td><td>1d 17h</td><td>2h 11m</td><td>Good — room to improve toward Top 5%</td></tr>
-        <tr><td>Messages per Ticket</td><td>6.65</td><td>4.15</td><td>3.1</td><td>Needs work — above benchmark</td></tr>
-        <tr><td>First Response Time</td><td>9m 26s</td><td>10h 28m</td><td>46m 06s</td><td>Exceptional</td></tr>
-      </tbody>
-    </table>
-    <div class="insight good">First response time remains a clear strength. The bigger opportunity is still reducing back-and-forth on common order-status and pre-sale questions so fewer tickets need long threads to reach resolution.</div>
-  </div>
-
-  <div class="card">
-    <h2>The #1 Finding: WISMO is 28.5% of Real Support Volume</h2>
-    <div class="insight critical">178 tickets in May were customers asking order-status, lead-time, or shipping-timing questions — still one of the largest operational burdens in the queue.</div>
-    <div class="chart-row">
-      <div>
-        <table>
-          <tbody>
-            <tr><td>Order ETA / Status</td><td>125</td></tr>
-            <tr><td>Availability / Lead Time</td><td>53</td></tr>
-            <tr><td>Shipping Speed / Timing</td><td>0</td></tr>
-            <tr><th>Total WISMO-Related</th><th>178</th></tr>
-          </tbody>
-        </table>
-        <div class="insight">Lead-time clarity and proactive order updates would remove a large repeat-contact driver from the support queue. The concentration remains especially heavy in ETA / status questions.</div>
-      </div>
-      <div><div class="chart-container"><canvas id="wismoChart"></canvas></div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Agent Performance — Retail Team</h2>
-    <p style="color:#6b7280;margin-bottom:16px">Jeremy's primary volume is in Shopify Inbox and is not fully reflected here. Josie shows 70% CSR starting May. Kelsey remains 10% CSR.</p>
-    <table>
-      <thead><tr><th>Agent</th><th>Role</th><th>% CSR</th><th>Closed</th><th>Handle Time</th><th>CSAT</th><th>1st Response</th><th>One-Touch %</th><th>Closed/Hr</th></tr></thead>
-      <tbody>
-        <tr><td>Ellie</td><td><span class="badge badge-t2">T2</span></td><td></td><td>304</td><td>8m 37s</td><td>4.85</td><td>1h 41m</td><td>23.68%</td><td>4.38</td></tr>
-        <tr><td>AI Bot</td><td><span class="badge badge-ai">AI</span></td><td></td><td>276</td><td>—</td><td>2.67</td><td>15s</td><td>49.28%</td><td>—</td></tr>
-        <tr><td>Josie</td><td><span class="badge badge-t2">T2</span></td><td>70%</td><td>271</td><td>7m 24s</td><td>4.52</td><td>4h 14m</td><td>23.25%</td><td>7.57</td></tr>
-        <tr><td>Holly</td><td><span class="badge badge-t3">T3 / Mgr</span></td><td></td><td>146</td><td>5m 39s</td><td>4.78</td><td>11h 25m</td><td>34.25%</td><td>6.44</td></tr>
-        <tr><td>Garrett</td><td><span class="badge badge-t3">T3 / PM</span></td><td>10-15%</td><td>54</td><td>1m 28s</td><td>—</td><td>2h 10m</td><td>5.56%</td><td>18.97</td></tr>
-        <tr><td>Kelsey</td><td><span class="badge badge-t3">T3 / Mktg</span></td><td>10%</td><td>10</td><td>27m 12s</td><td>5.0</td><td>3h 23m</td><td>50.00%</td><td>0.64</td></tr>
-        <tr><td>Jeremy</td><td><span class="badge badge-t3">T3 / E-com Mgr</span></td><td></td><td>7</td><td>2m 32s</td><td>5.0</td><td>3h 45m</td><td>42.86%</td><td>5.61</td></tr>
-      </tbody>
-    </table>
-    <div class="insight">Ellie and Josie still carry the bulk of tracked human volume. AI Bot is now handling more tickets than any single human agent, but its CSAT remains well below the human team and needs targeted improvement before broader expansion.</div>
-    <div class="chart-container tall"><canvas id="agentChart"></canvas></div>
-  </div>
-
-  <div class="card">
-    <h2>Channel Mix</h2>
-    <table>
-      <thead><tr><th>Channel</th><th>Tickets</th><th>% Mix</th><th>Resolution</th><th>1st Response</th><th>CSAT</th></tr></thead>
-      <tbody>
-        <tr><td>Email</td><td>866</td><td>55.6%</td><td>3d 02h</td><td>4h 24m</td><td>5.0</td></tr>
-        <tr><td>Chat</td><td>404</td><td>25.9%</td><td>15m 05s</td><td>15s</td><td>4.0</td></tr>
-        <tr><td>Phone</td><td>103</td><td>6.6%</td><td>2d 23h</td><td>30m 24s</td><td>—</td></tr>
-        <tr><td>SMS</td><td>103</td><td>6.6%</td><td>20h 44m</td><td>1h 41m</td><td>—</td></tr>
-        <tr><td>Help Center</td><td>51</td><td>3.3%</td><td>1d 02h</td><td>2h 06m</td><td>4.9</td></tr>
-        <tr><td>Contact Form</td><td>31</td><td>2.0%</td><td>15h 23m</td><td>1h 13m</td><td>5.0</td></tr>
-      </tbody>
-    </table>
-    <div class="chart-container"><canvas id="channelChart"></canvas></div>
-    <div class="insight">Email now represents a larger majority of created volume than in April, while chat remains the speed channel by a wide margin. That split reinforces the need to deflect repetitive questions before they become long email threads.</div>
-  </div>
-
-  <div class="card">
-    <h2>Busiest Times — Ticket Volume Heatmap</h2>
-    <p style="color:#6b7280">Darker = more tickets created. Peak: Mon 11 AM (46 tickets in May).</p>
-    <div style="overflow-x:auto;">
-      <table class="heatmap"><thead><tr><th>Hour</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody id="heatmapBody"></tbody></table>
-    </div>
-    <div class="insight">Volume still concentrates on weekday business hours, with the strongest block from late morning through early afternoon. Monday 11 AM is the single busiest hour in the May file.</div>
-  </div>
-
-  <div class="chart-row">
-    <div class="card">
-      <h2>Top Product Categories</h2>
-      <div class="chart-container tall"><canvas id="productChart"></canvas></div>
-      <table>
-        <thead><tr><th>Product Category</th><th>Tickets</th></tr></thead>
-        <tbody>
-          <tr><td>Window</td><td>140</td></tr>
-          <tr><td>No Product</td><td>113</td></tr>
-          <tr><td>Power</td><td>54</td></tr>
-          <tr><td>Product Misc</td><td>42</td></tr>
-          <tr><td>Insulation</td><td>36</td></tr>
-        </tbody>
-      </table>
-      <div class="insight">Windows widened their lead in May. "No Product" also remains material, which is not necessarily a gap — many customers are asking about policy, availability, or general purchase questions rather than a specific SKU family.</div>
-    </div>
-    <div class="card">
-      <h2>Top Vendors</h2>
-      <div class="chart-container tall"><canvas id="vendorChart"></canvas></div>
-      <table>
-        <thead><tr><th>Vendor</th><th>Tickets</th></tr></thead>
-        <tbody>
-          <tr><td>No Vendor</td><td>592</td></tr>
-          <tr><td>Other Vendor</td><td>65</td></tr>
-          <tr><td>EcoFlow</td><td>58</td></tr>
-          <tr><td>CR Laurence</td><td>56</td></tr>
-          <tr><td>Van Windows Direct</td><td>45</td></tr>
-        </tbody>
-      </table>
-      <div class="insight">EcoFlow and CR Laurence were nearly tied for the largest named vendor burden in May, with Van Windows Direct still close behind. The much larger story, though, is how much volume sits in No Vendor or Other Vendor.</div>
-    </div>
-  </div>
-  <div class="insight">No Vendor = 592 and Other Vendor = 65. That makes vendor analysis directionally useful, but still limited. Product Misc also accounts for 42 tickets, so additional Ticket Fields cleanup would improve decision quality.</div>
-
-  <div class="card">
-    <h2>Top Ticket Reasons</h2>
-    <div class="chart-container tall"><canvas id="reasonChart"></canvas></div>
-    <table>
-      <thead><tr><th>Reason</th><th>Tickets</th></tr></thead>
-      <tbody>
-        <tr><td>ETA / Status</td><td>125</td></tr>
-        <tr><td>Product Question</td><td>124</td></tr>
-        <tr><td>Availability / Lead Time</td><td>53</td></tr>
-        <tr><td>Change / Cancel Order</td><td>48</td></tr>
-        <tr><td>Return / Exchange</td><td>36</td></tr>
-      </tbody>
-    </table>
-    <div class="insight">May was almost a dead heat between WISMO and pre-sale product questions. That keeps both order clarity and conversion-focused content at the center of the improvement plan.</div>
-  </div>
-
-  <div class="card">
-    <h2>Vendor Support Burden — Accountability Scorecard</h2>
-    <h3>High Burden (25+ tickets/month)</h3>
-    <table>
-      <thead><tr><th>Vendor</th><th>May Tickets</th><th>% of Tagged</th><th>Tickets/Week</th></tr></thead>
-      <tbody>
-        <tr class="tier-high"><td>EcoFlow</td><td>58</td><td>11.4%</td><td>13.5</td></tr>
-        <tr class="tier-high"><td>CR Laurence</td><td>56</td><td>11.0%</td><td>13.0</td></tr>
-        <tr class="tier-high"><td>Van Windows Direct</td><td>45</td><td>8.8%</td><td>10.5</td></tr>
-        <tr class="tier-high"><td>Perfect Fit</td><td>34</td><td>6.7%</td><td>7.9</td></tr>
-        <tr class="tier-high"><td>Fiamma</td><td>28</td><td>5.5%</td><td>6.5</td></tr>
-      </tbody>
-    </table>
-    <h3>Medium Burden (10–24 tickets/month)</h3>
-    <table>
-      <thead><tr><th>Vendor</th><th>May Tickets</th><th>% of Tagged</th><th>Tickets/Week</th></tr></thead>
-      <tbody>
-        <tr class="tier-med"><td>Tech Vanlife/RoamLabX</td><td>23</td><td>4.5%</td><td>5.3</td></tr>
-        <tr class="tier-med"><td>AM Auto</td><td>18</td><td>3.5%</td><td>4.2</td></tr>
-        <tr class="tier-med"><td>Marathon</td><td>18</td><td>3.5%</td><td>4.2</td></tr>
-        <tr class="tier-med"><td>Arctic Tern</td><td>12</td><td>2.4%</td><td>2.8</td></tr>
-        <tr class="tier-med"><td>Nova Kool</td><td>12</td><td>2.4%</td><td>2.8</td></tr>
-        <tr class="tier-med"><td>S&amp;B</td><td>12</td><td>2.4%</td><td>2.8</td></tr>
-        <tr class="tier-med"><td>2tec2</td><td>11</td><td>2.2%</td><td>2.6</td></tr>
-        <tr class="tier-med"><td>Lost Hiway</td><td>11</td><td>2.2%</td><td>2.6</td></tr>
-      </tbody>
-    </table>
-    <p style="color:#6b7280"><em>Tagged named vendors account for 510 tickets in May after excluding No Vendor and Dropped rows.</em></p>
-    <div class="insight">May vendor burden is concentrated in five named vendors, with EcoFlow and CR Laurence now sitting at the top. The larger structural issue is still Ticket Fields completeness, because named-vendor rankings sit underneath a very large No Vendor bucket.</div>
-  </div>
-
-  <div class="card">
-    <h2>Pre-Sale Opportunity</h2>
-    <div class="insight good">273 pre-sale tickets = customers actively trying to buy.</div>
-    <table>
-      <thead><tr><th>Pre-Sale Reason</th><th>Tickets</th><th>Opportunity</th></tr></thead>
-      <tbody>
-        <tr><td>Product Questions</td><td>124</td><td>FAQ pages, AI bot, comparison guides</td></tr>
-        <tr><td>Availability / Lead Time</td><td>53</td><td>Stock status and ETA visibility on product pages</td></tr>
-        <tr><td>Ordering / Website Help</td><td>33</td><td>UX improvements and checkout clarity</td></tr>
-        <tr><td>Coupon / Discount / Sale Price</td><td>21</td><td>Promo visibility and pricing expectations</td></tr>
-        <tr><td>Shipping Question</td><td>19</td><td>Shipping calculator and clearer policy copy</td></tr>
-        <tr><td>Installation Question</td><td>14</td><td>Install guides and product education content</td></tr>
-        <tr><td>MOV</td><td>9</td><td>Minimum-order clarity on site</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="card">
-    <h2>Dropped Calls Analysis</h2>
-    <div class="insight critical">67 dropped calls in May. Combined with 103 connected phone tickets, that is 170 call attempts — 39.4% of callers never got through.</div>
-    <table>
-      <thead><tr><th>Metric</th><th>Value</th></tr></thead>
-      <tbody>
-        <tr><td>Connected Calls</td><td>103</td></tr>
-        <tr><td>Dropped Calls</td><td>67</td></tr>
-        <tr><td>Total Call Attempts</td><td>170</td></tr>
-        <tr><td>Drop Rate</td><td>39.4%</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="card">
-    <h2>Top 6 Recommendations for June</h2>
-    <ol class="rec-list">
-      <li><strong>Reduce WISMO at the Source</strong><br>ETA / status and lead-time questions still account for 178 tickets. Better product-page ETA language, proactive order updates, and clearer vendor lead-time ranges would directly reduce queue load.</li>
-      <li><strong>Improve AI Bot CSAT Before Expanding Scope</strong><br>AI Bot closed 276 tickets in May, but CSAT was 2.7 versus 4.8 for humans. Focus training on order-status, product Q&amp;A, and handoff quality before asking it to absorb more volume.</li>
-      <li><strong>Turn Pre-Sale Traffic into Revenue</strong><br>273 tickets came from customers actively trying to buy. Better FAQs, comparison pages, install content, and lead-time visibility should reduce support load while helping conversion.</li>
-      <li><strong>Tighten Ticket Fields Completeness</strong><br>No Vendor, Other Vendor, No Product, and Product Misc still limit how actionable the monthly breakdowns can be. Cleaner Ticket Fields will make vendor and merchandising decisions more precise.</li>
-      <li><strong>Use the Named Vendor Burden List in Supplier Prioritization</strong><br>EcoFlow, CR Laurence, Van Windows Direct, Perfect Fit, and Fiamma account for a disproportionate share of named-vendor tickets and should stay near the top of supplier improvement conversations.</li>
-      <li><strong>Make a Clear Phone-Channel Decision</strong><br>A 39.4% dropped-call rate is too large to ignore. Either improve live coverage, offer a callback path, or steer more clearly toward digital channels that already resolve faster.</li>
-    </ol>
-  </div>
-
-  <footer>Campervan HQ &amp; Van Land · May 2026 Retail Support Analysis · Data source: Gorgias</footer>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CVHQ & Van Land Retail Support Metrics — May 2026</title><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script><style>
+:root{--bg:#f8fafc;--card:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--blue:#2563eb;--pink:#fdf2f8;--yellow:#fffbeb;}*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.55;margin:0}.container{max-width:1220px;margin:0 auto;padding:20px}header{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:38px;border-radius:16px;margin-bottom:24px}header h1{margin:0 0 4px;font-size:2em}header h2{margin:0 0 4px;font-size:1.35em;font-weight:400;opacity:.95}header h3{margin:0;font-size:1.05em;font-weight:400;opacity:.85}.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}.tile{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.tile .eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#111}.tile .value{font-size:1.8em;font-weight:700;color:#111;margin-top:8px;line-height:1.2}.tile .sub{font-size:.9em;color:#444;margin-top:6px}.card{background:var(--card);border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.08);margin-bottom:24px}.card h2{font-size:1.28em;margin:0 0 12px;color:#2563eb}.chart-container{position:relative;height:340px}.chart-container.tall{height:440px}.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}.insight{background:#fffbeb;border-left:4px solid #f59e0b;padding:14px 16px;border-radius:0 8px 8px 0;margin:16px 0}.insight.good{background:#f0fdf4;border-left-color:#10b981}.insight.critical{background:#fef2f2;border-left-color:#ef4444}table{width:100%;border-collapse:collapse;font-size:.92em}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #e5e7eb;vertical-align:top}th{background:#f3f4f6;color:#6b7280;text-transform:uppercase;font-size:.78em;letter-spacing:.04em}.heatmap{width:100%;border-collapse:collapse}.heatmap td{text-align:center;padding:3px 5px;font-size:.72em;line-height:1.1;border:1px solid #e5e7eb;min-width:40px}.heatmap th{text-align:center;padding:4px 5px;font-size:.7em;line-height:1.1;border:1px solid #e5e7eb}.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:.8em;font-weight:600}.badge-t2{background:#dbeafe;color:#1e40af}.badge-t3{background:#fef3c7;color:#92400e}.badge-ai{background:#ede9fe;color:#5b21b6}.tier-high td{background:#fdf2f8}.tier-med td{background:#fffbeb}.rec-list{list-style:none;counter-reset:rec;padding:0}.rec-list li{counter-increment:rec;padding:16px 16px 16px 60px;margin-bottom:12px;background:#f8fafc;border-radius:8px;position:relative}.rec-list li::before{content:counter(rec);position:absolute;left:16px;top:16px;width:32px;height:32px;background:#2563eb;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}footer{text-align:center;padding:26px;color:#6b7280;font-size:.85em}@media (max-width:900px){.kpi-grid,.chart-row{grid-template-columns:1fr 1fr}}@media (max-width:640px){.kpi-grid,.chart-row{grid-template-columns:1fr}}</style></head><body><div class="container">
+<header><h1>Campervan HQ & Van Land</h1><h2>Retail Support Metrics</h2><h3>May 2026</h3></header>
+<div class="kpi-grid">
+<div class="tile"><div class="eyebrow">Real Tickets</div><div class="value">625</div><div class="sub">Excludes spam, dropped, and dev/test</div></div>
+<div class="tile"><div class="eyebrow">Human vs AI Closed</div><div class="value">79% / 21%</div><div class="sub">1,127 human vs 276 AI closed</div></div>
+<div class="tile"><div class="eyebrow">Auto Filtered</div><div class="value">451</div><div class="sub">Spam / junk tickets</div></div>
+<div class="tile"><div class="eyebrow">Avg Human CSAT</div><div class="value">4.8</div><div class="sub">AI Bot CSAT: 2.7</div></div>
 </div>
-
-<script>
+<div class="kpi-grid">
+<div class="tile"><div class="eyebrow">Avg First Response</div><div class="value">5m 38s</div><div class="sub">May overview benchmark</div></div>
+<div class="tile"><div class="eyebrow">WISMO Share</div><div class="value">30.4%</div><div class="sub">190 tickets</div></div>
+<div class="tile"><div class="eyebrow">Top Channel</div><div class="value">Email</div><div class="sub">866 tickets (55.6%)</div></div>
+<div class="tile"><div class="eyebrow">Msgs / Ticket</div><div class="value">6.53</div><div class="sub">Average ticket resolution time: 5h 17s</div></div>
+</div>
+<div class="kpi-grid" style="margin-bottom:30px">
+<div class="tile"><div class="eyebrow">Top Ticket Reason</div><div class="value">Order ETA / Status</div><div class="sub">125 tickets</div></div>
+<div class="tile"><div class="eyebrow">Top Product Type</div><div class="value">Window</div><div class="sub">140 tickets</div></div>
+<div class="tile"><div class="eyebrow">Top Vendor</div><div class="value">Other Vendor</div><div class="sub">65 tickets</div></div>
+<div class="tile"><div class="eyebrow">Pre-Sale Tickets</div><div class="value">273</div><div class="sub">Customers actively trying to buy</div></div>
+</div>
+<div class="card"><h2>How We Compare — Gorgias Benchmarks</h2><table><thead><tr><th>Metric</th><th>Us</th><th>Avg Merchant</th><th>Top 5%</th><th>Status</th></tr></thead><tbody><tr><td>CSAT</td><td>4.70</td><td>4.56</td><td>4.89</td><td>Good — above average</td></tr><tr><td>Resolution Time</td><td>5h 17s</td><td>1d 17h</td><td>2h 11m</td><td>Good — much faster than average</td></tr><tr><td>Messages per Ticket</td><td>6.53</td><td>4.15</td><td>3.1</td><td>Needs work — above benchmark</td></tr><tr><td>First Response Time</td><td>5m 38s</td><td>10h 28m</td><td>46m 06s</td><td>Exceptional</td></tr></tbody></table><div class="insight good">May first response time remains a clear strength at under 6 minutes versus an industry average above 10 hours. The bigger opportunity is still reducing repeat back-and-forth on order-status and pre-sale tickets.</div></div>
+<div class="card"><h2>The #1 Finding: WISMO is 30% of Real Support Volume</h2><div class="insight critical">190 tickets in May were customers asking order-status / lead-time questions — still the single biggest operational support burden.</div><div class="chart-row"><div><table><tbody><tr><td>Order ETA / Status</td><td>125</td></tr><tr><td>Availability / Lead Time</td><td>53</td></tr><tr><td>Shipping Speed / Timing</td><td>12</td></tr><tr><th>Total WISMO-Related</th><th>190</th></tr></tbody></table><div class="insight">Reducing ETA and lead-time uncertainty would remove one of the largest repeat-contact drivers in the support queue.</div></div><div><div class="chart-container"><canvas id="wismoChart"></canvas></div></div></div></div>
+<div class="card"><h2>Agent Performance — Retail Team</h2><p style="color:#6b7280;margin-bottom:16px">Jeremy's primary volume is in Shopify Inbox (not reflected here). Josie = 70% CSR in May. Kelsey = 10% from April onward.</p><table><thead><tr><th>Agent</th><th>Role</th><th>% CSR</th><th>Closed</th><th>Handle Time</th><th>CSAT</th><th>1st Response</th><th>One-Touch %</th><th>Closed/Hr</th></tr></thead><tbody><tr><td>Ellie</td><td><span class="badge badge-t2">T2</span></td><td></td><td>304</td><td>8m 37s</td><td>4.85</td><td>1h 41m</td><td>24%</td><td>4.4</td></tr><tr><td>AI Bot</td><td><span class="badge badge-ai">AI</span></td><td></td><td>276</td><td>-</td><td>2.67</td><td>15s</td><td>49%</td><td>—</td></tr><tr><td>Josie</td><td><span class="badge badge-t2">T2</span></td><td>70%</td><td>271</td><td>7m 24s</td><td>4.52</td><td>4h 14m</td><td>23%</td><td>7.6</td></tr><tr><td>Holly</td><td><span class="badge badge-t3">T3 / Mgr</span></td><td></td><td>146</td><td>5m 39s</td><td>4.78</td><td>11h 25m</td><td>34%</td><td>6.4</td></tr><tr><td>Garrett</td><td><span class="badge badge-t3">T3 / PM</span></td><td>10-15%</td><td>54</td><td>1m 28s</td><td>—</td><td>2h 10m</td><td>6%</td><td>19.0</td></tr><tr><td>Kelsey</td><td><span class="badge badge-t3">T3 / Mktg</span></td><td>10%</td><td>10</td><td>27m 12s</td><td>5.0</td><td>3h 23m</td><td>50%</td><td>0.6</td></tr><tr><td>Jeremy</td><td><span class="badge badge-t3">T3 / E-com Mgr</span></td><td></td><td>7</td><td>2m 32s</td><td>5.0</td><td>3h 45m</td><td>43%</td><td>5.6</td></tr></tbody></table><div class="insight">Ellie remained the highest-volume human closer in May, with Josie next. AI Bot handled meaningful additional volume, but its CSAT remained well below the human team and still needs improvement before broader scope expansion.</div><div class="chart-container tall"><canvas id="agentChart"></canvas></div></div>
+<div class="card"><h2>Channel Mix</h2><table><thead><tr><th>Channel</th><th>Tickets</th><th>% Mix</th><th>Resolution</th><th>1st Response</th><th>CSAT</th></tr></thead><tbody><tr><td>Email</td><td>866</td><td>55.6%</td><td>3d 02h</td><td>4h 24m</td><td>5.0</td></tr><tr><td>Chat</td><td>404</td><td>25.9%</td><td>15m 05s</td><td>15s</td><td>4.0</td></tr><tr><td>Phone</td><td>103</td><td>6.6%</td><td>2d 23h</td><td>30m 24s</td><td>—</td></tr><tr><td>SMS</td><td>103</td><td>6.6%</td><td>20h 44m</td><td>1h 41m</td><td>—</td></tr><tr><td>Help Center</td><td>51</td><td>3.3%</td><td>1d 02h</td><td>2h 06m</td><td>4.9</td></tr><tr><td>Contact Form</td><td>31</td><td>2.0%</td><td>15h 23m</td><td>1h 13m</td><td>5.0</td></tr></tbody></table><div class="chart-container"><canvas id="channelChart"></canvas></div><div class="insight">Chat remained the speed champion in May, while email still carried most volume. Channel data includes spam tickets, so the mix is best read as inbound workload rather than only real-ticket demand.</div></div>
+<div class="card"><h2>Busiest Times — Ticket Volume Heatmap</h2><p style="color:#6b7280">Darker = more tickets created. Peak: Monday 11 AM (46 tickets in May).</p><div style="overflow-x:auto;"><table class="heatmap"><thead><tr><th>Hour</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead><tbody id="heatmapBody"></tbody></table></div><div class="insight">Staffing insight: weekday mornings still dominate demand, and Monday at 11 AM was our single busiest hour in May. Weekends remain materially lighter than the Mon–Fri support window.</div></div>
+<div class="chart-row"><div class="card"><h2>Top Product Categories</h2><div class="chart-container tall"><canvas id="productChart"></canvas></div><table><thead><tr><th>Product Type</th><th>Tickets</th></tr></thead><tbody><tr><td>Window</td><td>140</td></tr><tr><td>No Product</td><td>113</td></tr><tr><td>Power</td><td>54</td></tr><tr><td>Product Misc</td><td>42</td></tr><tr><td>Insulation</td><td>36</td></tr></tbody></table><div class="insight">Windows remained the top product category in May, with No Product and power also prominent. That still points to a mix of product-selection questions plus a meaningful share of policy, order, and general support conversations that are not tied to a specific product.</div></div><div class="card"><h2>Top Vendors</h2><div class="chart-container tall"><canvas id="vendorChart"></canvas></div><table><thead><tr><th>Vendor</th><th>Tickets</th></tr></thead><tbody><tr><td>Other Vendor</td><td>65</td></tr><tr><td>EcoFlow</td><td>58</td></tr><tr><td>CR Laurence</td><td>56</td></tr><tr><td>Van Windows Direct</td><td>45</td></tr><tr><td>Perfect Fit</td><td>34</td></tr></tbody></table><div class="insight">Other Vendor led the visible vendor list in May, with EcoFlow, CR Laurence, and Van Windows Direct close behind. Visible vendor burden remains concentrated in a relatively small group.</div></div></div><div class="insight">Total <strong>Other Vendor</strong> = 65. That is still large enough to limit the usefulness of vendor reporting, so it would be worthwhile to keep adding more granular vendor options to the Ticket Fields in Gorgias. Product Misc also accounts for 42 tickets.</div>
+<div class="card"><h2>Top Ticket Reasons</h2><div class="chart-container tall"><canvas id="reasonChart"></canvas></div><table><thead><tr><th>Reason</th><th>Tickets</th></tr></thead><tbody><tr><td>Order ETA / Status</td><td>125</td></tr><tr><td>Product Question</td><td>124</td></tr><tr><td>Availability / Lead Time</td><td>53</td></tr><tr><td>Change / Cancel Order</td><td>48</td></tr><tr><td>Return / Exchange</td><td>36</td></tr></tbody></table><div class="insight">Order ETA / status and product questions remained the two biggest ticket drivers in May, followed by availability / lead time. That keeps both WISMO reduction and better pre-sale clarity at the center of the improvement plan.</div></div>
+<div class="card"><h2>Vendor Support Burden — Accountability Scorecard</h2><h3>High Burden (25+ tickets/month)</h3><table><thead><tr><th>Vendor</th><th>May Tickets</th><th>% of Tagged</th><th>Tickets/Week</th></tr></thead><tbody><tr class="tier-high"><td>EcoFlow</td><td>58</td><td>13.8%</td><td>13</td></tr><tr class="tier-high"><td>CR Laurence</td><td>56</td><td>13.3%</td><td>13</td></tr><tr class="tier-high"><td>Van Windows Direct</td><td>45</td><td>10.7%</td><td>10</td></tr><tr class="tier-high"><td>Perfect Fit</td><td>34</td><td>8.1%</td><td>7</td></tr><tr class="tier-high"><td>Fiamma</td><td>28</td><td>6.7%</td><td>6</td></tr></tbody></table><h3>Medium Burden (10–24 tickets/month)</h3><table><thead><tr><th>Vendor</th><th>May Tickets</th><th>% of Tagged</th><th>Tickets/Week</th></tr></thead><tbody><tr class="tier-med"><td>Tech Vanlife/RoamLabX</td><td>23</td><td>5.5%</td><td>5</td></tr><tr class="tier-med"><td>AM Auto</td><td>18</td><td>4.3%</td><td>4</td></tr><tr class="tier-med"><td>Marathon</td><td>18</td><td>4.3%</td><td>4</td></tr><tr class="tier-med"><td>Arctic Tern</td><td>12</td><td>2.9%</td><td>2</td></tr><tr class="tier-med"><td>Lonseal</td><td>12</td><td>2.9%</td><td>2</td></tr><tr class="tier-med"><td>S&B</td><td>12</td><td>2.9%</td><td>2</td></tr></tbody></table><p style="color:#6b7280"><em>15 additional low-burden vendors account for 71 tickets combined.</em></p><div class="insight">Vendor burden remains concentrated, but the monthly picture is more compressed than Q1. That makes the top few vendors even more useful as the immediate focus set.</div></div>
+<div class="card"><h2>Pre-Sale Opportunity</h2><div class="insight good">273 pre-sale tickets = customers actively trying to buy.</div><table><thead><tr><th>Pre-Sale Reason</th><th>Tickets</th><th>Opportunity</th></tr></thead><tbody><tr><td>Product Questions</td><td>124</td><td>FAQ pages, AI bot, comparison guides</td></tr><tr><td>Availability / Lead Time</td><td>53</td><td>Stock status on product pages</td></tr><tr><td>Ordering / Website Help</td><td>33</td><td>UX improvements, checkout flow</td></tr><tr><td>Coupon / Discount</td><td>21</td><td>Promo visibility, exit-intent</td></tr><tr><td>Shipping Questions</td><td>15</td><td>Shipping calculator, clear policies</td></tr><tr><td>Installation Questions</td><td>12</td><td>Install guides, video content</td></tr><tr><td>MOV</td><td>12</td><td>Minimum-order clarity on site</td></tr></tbody></table></div>
+<div class="card"><h2>Dropped Calls Analysis</h2><div class="insight critical">61 dropped calls in May. Combined with 103 connected phone tickets, that's 164 call attempts — 37.2% of callers never got through.</div><table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>Connected Calls</td><td>103</td></tr><tr><td>Dropped Calls</td><td>61</td></tr><tr><td>Total Call Attempts</td><td>164</td></tr><tr><td>Drop Rate</td><td>37.2%</td></tr></tbody></table></div>
+<div class="card"><h2>Top 6 Recommendations</h2><ol class="rec-list"><li><strong>Improve AI Bot CSAT & Expand Scope</strong><br>AI Bot CSAT dropped from 3.0 in April to 2.7 in May, even as handled volume increased to 276 closed tickets. That higher May volume may be part of why more training is needed before expanding scope further.</li><li><strong>Reduce WISMO at the Source</strong><br>WISMO still accounts for 190 May tickets. Better order-status visibility, clearer lead times, and tighter vendor ETA communication should remove one of the largest repeat-contact drivers in the queue.</li><li><strong>Convert Pre-Sale Tickets into Revenue</strong><br>Pre-sale tickets remain a meaningful revenue opportunity. Better product pages, FAQs, install guides, and stock visibility should reduce friction while improving conversion.</li><li><strong>Continue to Close the Ticket Fields Gap</strong><br>Several Ticket Fields were added since the April report, and that progress should continue. “Other Vendor” and broad product buckets are still large enough to limit reporting precision and decision quality.</li><li><strong>Vendor Accountability Scorecard</strong><br>A relatively small set of vendors still drives a disproportionate share of support burden. Use that list to prioritize supplier conversations, merchandising cleanup, and expectation-setting improvements.</li><li><strong>Phone Channel Decision</strong><br>Dropped calls remain material. Evaluate whether tighter deflection, callback support, or a clearer no-phone policy best matches the business goal.</li></ol></div>
+<footer>Campervan HQ & Van Land · May 2026 Retail Support Analysis · Data source: Gorgias</footer></div><script>
 const colors={blue:'#3b82f6',amber:'#f59e0b',red:'#ef4444',green:'#10b981',purple:'#8b5cf6',teal:'#14b8a6',slate:'#64748b',orange:'#f97316'};
-new Chart(document.getElementById('wismoChart'),{type:'doughnut',data:{labels:['Order ETA / Status','Availability / Lead Time','Shipping Speed / Timing'],datasets:[{data:[125,53,0],backgroundColor:[colors.red,colors.blue,colors.teal]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('wismoChart'),{type:'doughnut',data:{labels:['Order ETA / Status','Availability / Lead Time','Shipping Speed / Timing'],datasets:[{data:[125,53,12],backgroundColor:[colors.red,colors.blue,colors.teal]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}});
 new Chart(document.getElementById('agentChart'),{type:'bar',data:{labels:['Ellie','AI Bot','Josie (70%)','Holly','Garrett','Kelsey','Jeremy'],datasets:[{label:'Tickets Closed',data:[304,276,271,146,54,10,7],backgroundColor:[colors.blue,colors.purple,colors.blue,colors.blue,colors.blue,colors.blue,colors.teal],yAxisID:'y',borderRadius:4},{label:'CSAT',data:[4.85,2.67,4.52,4.78,null,5.0,5.0],type:'line',borderColor:colors.amber,backgroundColor:colors.amber,yAxisID:'y1',pointRadius:5,tension:.1}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,title:{display:true,text:'Tickets Closed'}},y1:{position:'right',min:2.5,max:5.2,title:{display:true,text:'CSAT'},grid:{drawOnChartArea:false}}}}});
 new Chart(document.getElementById('channelChart'),{type:'doughnut',data:{labels:['Email (55.6%)','Chat (25.9%)','Phone (6.6%)','SMS (6.6%)','Help Center (3.3%)','Contact Form (2.0%)'],datasets:[{data:[866,404,103,103,51,31],backgroundColor:[colors.blue,colors.green,colors.purple,colors.slate,colors.teal,colors.orange]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}});
-new Chart(document.getElementById('productChart'),{type:'bar',data:{labels:['Window','No Product','Power','Product Misc','Insulation','Awning'],datasets:[{data:[140,113,54,42,36,28],backgroundColor:['#7baaf7','#8db7f8','#9fc4fa','#b1d0fb','#c3ddfd','#d5e9fe'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
-new Chart(document.getElementById('vendorChart'),{type:'bar',data:{labels:['No Vendor','Other Vendor','EcoFlow','CR Laurence','Van Windows Direct','Perfect Fit'],datasets:[{data:[592,65,58,56,45,34],backgroundColor:['#4ec0b8','#63c8c1','#78d0ca','#8dd8d3','#a2e0dc','#b7e8e5'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
-new Chart(document.getElementById('reasonChart'),{type:'bar',data:{labels:['ETA / Status','Product Question','Availability / Lead Time','Change / Cancel Order','Return / Exchange','Order Pickup'],datasets:[{data:[125,124,53,48,36,34],backgroundColor:['#4b7ff7','#5c8cf8','#6d99f9','#7ea5fa','#8fb2fb','#a0bffd'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
-const heatmapData=[["12 AM",0,1,1,2,1,3,0],["1 AM",1,1,1,1,2,1,1],["2 AM",1,0,2,4,1,1,0],["3 AM",13,1,1,10,1,2,1],["4 AM",1,2,1,0,1,1,0],["5 AM",3,3,1,1,2,5,1],["6 AM",16,5,6,25,4,9,3],["7 AM",4,7,8,7,15,4,4],["8 AM",30,26,16,18,24,19,17],["9 AM",21,17,18,40,18,9,6],["10 AM",26,21,29,30,16,8,4],["11 AM",46,39,31,26,26,6,9],["12 PM",34,29,17,19,20,3,4],["1 PM",28,23,23,17,15,2,3],["2 PM",25,17,23,14,24,5,1],["3 PM",22,26,18,26,19,3,9],["4 PM",14,25,17,31,13,4,5],["5 PM",12,5,11,6,3,4,4],["6 PM",6,4,6,5,9,3,4],["7 PM",14,5,11,5,7,2,3],["8 PM",2,8,4,1,6,1,5],["9 PM",3,2,2,2,3,5,3],["10 PM",1,2,1,1,1,1,3],["11 PM",1,0,0,1,1,1,1]];
-const maxVal=Math.max(...heatmapData.flatMap(r=>r.slice(1))); const tbody=document.getElementById('heatmapBody');
-if(tbody){heatmapData.forEach(row=>{const tr=document.createElement('tr');row.forEach((val,i)=>{const td=document.createElement(i===0?'th':'td');td.textContent=val;if(i>0){const intensity=val/maxVal;const r=Math.round(255-intensity*218);const g=Math.round(255-intensity*127);const b=Math.round(255-intensity*9);td.style.backgroundColor=`rgb(${r},${g},${b})`;if(intensity>0.65)td.style.color='white';td.style.fontWeight=intensity>0.5?'700':'400';}tr.appendChild(td);});tbody.appendChild(tr);});}
-</script>
-</body>
-</html>
+new Chart(document.getElementById('productChart'),{type:'bar',data:{labels:['Window','No Product','Power','Product Misc','Insulation'],datasets:[{data:[140,113,54,42,36],backgroundColor:['#7baaf7','#8db7f8','#9fc4fa','#b1d0fb','#c3ddfd'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('vendorChart'),{type:'bar',data:{labels:['Other Vendor','EcoFlow','CR Laurence','Van Windows Direct','Perfect Fit'],datasets:[{data:[65,58,56,45,34],backgroundColor:['#4ec0b8','#63c8c1','#78d0ca','#8dd8d3','#a2e0dc'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('reasonChart'),{type:'bar',data:{labels:['Order ETA / Status','Product Question','Availability / Lead Time','Change / Cancel Order','Return / Exchange'],datasets:[{data:[125,124,53,48,36],backgroundColor:['#4b7ff7','#5c8cf8','#6d99f9','#7ea5fa','#8fb2fb'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
+const heatmapData=[["12 AM",0,1,1,2,1,3,0],["1 AM",1,1,1,1,2,1,1],["2 AM",1,0,2,4,1,1,0],["3 AM",13,1,1,10,1,2,1],["4 AM",1,2,1,0,1,1,0],["5 AM",3,3,1,1,2,5,1],["6 AM",16,5,6,25,4,9,3],["7 AM",4,7,8,7,15,4,4],["8 AM",30,26,16,18,24,19,17],["9 AM",21,17,18,40,18,9,6],["10 AM",26,21,29,30,16,8,4],["11 AM",46,39,31,26,26,6,9],["12 PM",34,29,17,19,20,3,4],["1 PM",28,23,23,17,15,2,3],["2 PM",25,17,23,14,24,5,1],["3 PM",22,26,18,26,19,3,9],["4 PM",14,25,17,31,13,4,5],["5 PM",12,5,11,6,3,4,4],["6 PM",6,4,6,5,9,3,4],["7 PM",14,5,11,5,7,2,3],["8 PM",2,8,4,1,6,1,5],["9 PM",3,2,2,2,3,5,3],["10 PM",1,2,1,1,1,1,3],["11 PM",1,0,0,1,1,1,1]]; const maxVal=Math.max(...heatmapData.flatMap(r=>r.slice(1))); const tbody=document.getElementById('heatmapBody'); if(tbody){ heatmapData.forEach(row=>{ const tr=document.createElement('tr'); row.forEach((val,i)=>{ const td=document.createElement(i===0?'th':'td'); td.textContent=val; if(i>0){ const intensity=val/maxVal; const r=Math.round(255-intensity*218); const g=Math.round(255-intensity*127); const b=Math.round(255-intensity*9); td.style.backgroundColor=`rgb(${r},${g},${b})`; if(intensity>0.65) td.style.color='white'; td.style.fontWeight=intensity>0.5?'700':'400'; } tr.appendChild(td); }); tbody.appendChild(tr); }); }
+</script></body></html>
